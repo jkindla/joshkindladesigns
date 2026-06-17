@@ -12,6 +12,8 @@
     --light-color: #f9fafb;
     --text-color: #374151;
     --border-color: #e5e7eb;
+    --display-font: 'Playfair Display', Georgia, serif;
+    --hero-font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 body {
@@ -111,6 +113,8 @@ body {
     z-index: 1;
 }
 
+/* floating shapes */
+
 .floating-shape {
     position: absolute;
     border-radius: 50%;
@@ -159,18 +163,22 @@ body {
     color: white;
     padding: 0.75rem 1.5rem;
     border-radius: 50px;
+    font-family: var(--hero-font);
     font-size: 0.95rem;
     font-weight: 600;
+    letter-spacing: 0.01em;
     margin-bottom: 2rem;
     border: 1px solid rgba(255, 255, 255, 0.3);
     animation: slideDown 0.8s ease;
 }
 
 .hero-content h1 {
-    font-size: 4rem;
+    font-family: var(--display-font);
+    font-size: 4.5rem;
     margin-bottom: 1.5rem;
-    font-weight: 700;
-    line-height: 1.2;
+    font-weight: 900;
+    line-height: 0.98;
+    letter-spacing: 0;
     animation: slideDown 0.8s ease 0.1s both;
     background: linear-gradient(to right, white, rgba(255, 255, 255, 0.9));
     -webkit-background-clip: text;
@@ -179,17 +187,13 @@ body {
 }
 
 .hero-subtitle {
+    font-family: var(--hero-font);
     font-size: 1.4rem;
+    font-weight: 500;
     margin-bottom: 2.5rem;
     opacity: 0.95;
-    line-height: 1.6;
+    line-height: 1.5;
     animation: slideDown 0.8s ease 0.2s both;
-}
-
-.hero-content p {
-    font-size: 1.4rem;
-    margin-bottom: 2.5rem;
-    opacity: 0.95;
 }
 
 .hero-cta-group {
@@ -297,10 +301,41 @@ body {
 .portfolio h2,
 .pricing h2,
 .contact h2 {
-    font-size: 2.5rem;
-    margin-bottom: 3rem;
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
     text-align: center;
     color: var(--dark-color);
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.services h2::after,
+.portfolio h2::after,
+.pricing h2::after,
+.contact h2::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent-color), transparent);
+    margin: 1rem auto 2rem;
+    border-radius: 2px;
+    animation: expandWidth 0.8s ease forwards;
+}
+
+@keyframes expandWidth {
+    from {
+        width: 0;
+    }
+    to {
+        width: 80px;
+    }
 }
 
 .services-grid {
@@ -329,11 +364,11 @@ body {
 }
 
 .service-card h3 {
-    color: var(--dark-color);
+    color: var(--primary-color);
     margin-bottom: 1rem;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
+    font-weight: 700;
 }
-
 .service-card p {
     color: #6b7280;
 }
@@ -354,7 +389,6 @@ body {
     overflow: hidden;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     transition: transform 0.3s;
-    cursor: pointer;
 }
 
 .portfolio-item:hover {
@@ -373,13 +407,40 @@ body {
 }
 
 .portfolio-info h3 {
-    color: var(--dark-color);
+    color: var(--primary-color);
     margin-bottom: 0.5rem;
+    font-weight: 700;
+    font-size: 1.2rem;
 }
 
 .portfolio-info p {
     color: #6b7280;
     font-size: 0.95rem;
+    margin-bottom: 1rem;
+}
+
+.portfolio-link {
+    color: var(--primary-color);
+    display: inline-flex;
+    align-items: center;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.portfolio-link::after {
+    content: '→';
+    margin-left: 0.4rem;
+    transition: transform 0.3s;
+}
+
+.portfolio-link:hover {
+    color: var(--secondary-color);
+}
+
+.portfolio-link:hover::after {
+    transform: translateX(3px);
 }
 
 /* Pricing Section */
@@ -410,6 +471,9 @@ body {
     text-align: center;
     position: relative;
     transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .pricing-card:hover {
@@ -438,9 +502,10 @@ body {
 }
 
 .pricing-card h3 {
-    font-size: 1.5rem;
-    color: var(--dark-color);
+    font-size: 1.6rem;
+    color: var(--primary-color);
     margin-bottom: 1rem;
+    font-weight: 700;
 }
 
 .price {
@@ -460,6 +525,7 @@ body {
     list-style: none;
     margin: 2rem 0;
     text-align: left;
+    flex: 1;
 }
 
 .features li {
@@ -482,7 +548,7 @@ body {
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s;
-    margin-top: 1rem;
+    margin-top: auto;
 }
 
 .pricing-button:hover {
@@ -610,15 +676,11 @@ body {
     }
 
     .hero-content h1 {
-        font-size: 2.5rem;
+        font-size: 3rem;
     }
 
     .hero-subtitle {
         font-size: 1.1rem;
-    }
-
-    .hero-content p {
-        font-size: 1rem;
     }
 
     .hero-stats {
@@ -633,7 +695,16 @@ body {
     .portfolio h2,
     .pricing h2,
     .contact h2 {
-        font-size: 1.8rem;
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .services h2::after,
+    .portfolio h2::after,
+    .pricing h2::after,
+    .contact h2::after {
+        width: 60px;
+        margin: 0.75rem auto 1.5rem;
     }
 
     .pricing-card.featured {
@@ -664,15 +735,31 @@ body {
 
 @media (max-width: 480px) {
     .hero-content h1 {
-        font-size: 1.5rem;
+        font-size: 2.25rem;
+        line-height: 1.05;
     }
 
-    .hero-content p {
+    .hero-subtitle {
         font-size: 0.9rem;
     }
 
     .cta-button {
         padding: 10px 25px;
         font-size: 0.95rem;
+    }
+
+    .services h2,
+    .portfolio h2,
+    .pricing h2,
+    .contact h2 {
+        font-size: 1.5rem;
+    }
+
+    .services h2::after,
+    .portfolio h2::after,
+    .pricing h2::after,
+    .contact h2::after {
+        width: 50px;
+        margin: 0.5rem auto 1rem;
     }
 }
